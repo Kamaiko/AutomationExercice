@@ -1,223 +1,102 @@
-🚀 Development Guide – Personal E2E Testing Project
+### Development Guide
 
-Learning guide for practicing E2E testing and automation using AutomationExercise.com
- as a sandbox.
-⚠️ Note: This project is NOT AutomationExercise.com. It is a student learning project for practicing QA procedures and automation testing.
+Humble, focused guide for practicing modern E2E testing. This project targets AutomationExercise.com for learning purposes only (not affiliated).
 
-📋 Table of Contents
+### Goals
+- End-to-end testing with Cypress
+- CI/CD with GitHub Actions
+- Clear reporting (Mochawesome)
+- Clean structure and pragmatic best practices
 
-🎯 Project Overview
-
-🛠️ Tech Stack
-
-🚀 Getting Started
-
-🧪 Test Structure
-
-⚙️ Configuration
-
-🔄 CI/CD Workflow
-
-📊 Reporting & Artifacts
-
-🔧 Development Workflow
-
-📚 Learning Objectives
-
-🤝 Contributing
-
-🎯 Project Overview
-
-This project is a QA/SDET learning playground for practicing modern automation testing techniques. The site used is AutomationExercise.com
-, solely for educational purposes.
-
-Focus Areas:
-
-🔍 End-to-end (E2E) testing with Cypress
-
-🔄 CI/CD pipelines using GitHub Actions
-
-📊 Professional reporting with Mochawesome
-
-🏗️ Best practices in test organization and modular architecture
-
-🚀 Hands-on DevOps workflow practice
-
-🛠️ Tech Stack
-
-Cypress 14.5.4 – E2E testing framework
-
-Mocha – JavaScript test runner
-
-Mochawesome – HTML test reports
-
-Node.js 20.x – Runtime environment
-
-npm 9.x – Package manager
-
-Git – Version control
-
-GitHub Actions – CI/CD automation
-
-Postman – API testing (optional)
-
-VS Code Recommended Extensions:
-
-Cypress Snippets
-
-ESLint
-
-Prettier
-
-GitLens
-
-Thunder Client (API testing)
-
-🚀 Getting Started
-Prerequisites
-
-Node.js 20.x or higher
-
-npm 9.x or higher
-
-Git
-
-Installation
-# Clone the repository
+### Quickstart
+- Prerequisites: Node.js 20+, npm 9+, Git
+- Install
+```bash
 git clone https://github.com/Kamaiko/AutomationExercice.git
 cd AutomationExercice
-
-# Install dependencies
 npm install
-
-# Verify Cypress installation
 npx cypress verify
+```
+- Run tests
+```bash
+npm run cypress:open   # interactive
+npm run cypress:run    # headless
+npx cypress run --spec "cypress/e2e/User/login.cy.js"  # focused
+```
 
-Running Tests
-# Open Cypress Test Runner (Interactive)
-npm run cypress:open
-
-# Run all tests headlessly
-npm run cypress:run
-
-# Run specific test
-npx cypress run --spec "cypress/e2e/User/login.cy.js"
-
-🧪 Test Structure
-File Organization
+### Structure
+```text
 cypress/
-├── e2e/
-│   ├── User/            # Authentication & profile tests
-│   ├── Shop/            # Product & cart tests
-│   ├── Checkout/        # Payment & checkout tests
-│   ├── Contact/         # Contact form tests
-│   └── UI_misc/         # General UI tests
-├── fixtures/            # Test data
-├── support/             # Custom commands & utilities
+├── e2e/          # test specs by domain
+├── fixtures/     # test data
+├── support/      # commands & setup
 │   ├── commands.js
-│   ├── e2e.js
-│   └── utils/
-├── screenshots/         # Failed test screenshots
-└── reports/             # HTML test reports
+│   └── e2e.js
+├── screenshots/  # failure screenshots
+└── reports/      # HTML reports
+```
 
-Custom Commands
-// Example custom commands
+### Conventions
+- Selectors: prefer data attributes (`[data-qa="..."]`)
+- Reuse: move repeated flows into custom commands
+- Stability: avoid arbitrary waits; use intercepts and assertions
+- Readability: small, focused tests with clear assertions
+
+### Example commands
+```javascript
+// cypress/support/commands.js
 cy.signupUser(userData)
 cy.loginUser(userData)
-cy.getByDataQa(attribute)
-cy.waitForPageLoad()
+cy.getByDataQa(attr)
+```
 
-⚙️ Configuration
-Cypress
+### Cypress config (excerpt)
+```javascript
 // cypress.config.js
 module.exports = defineConfig({
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
     reportDir: 'cypress/reports/html',
-    charts: true,
-    reportPageTitle: 'E2E Report',
     embeddedScreenshots: true,
     inlineAssets: true,
+    charts: true,
   },
   e2e: {
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on) {
       require('cypress-mochawesome-reporter/plugin')(on);
     },
   },
 });
+```
 
-Environment Variables
+### Env vars
+```bash
 # .env.local
 CYPRESS_BASE_URL=https://automationexercise.com
 CYPRESS_API_BASE_URL=https://api.automationexercise.com
+```
 
-🔄 CI/CD Workflow
+### CI/CD (GitHub Actions)
+- Triggers: push to main, PRs
+- Steps: install + cache, verify Cypress, run tests, upload artifacts (reports/screenshots)
 
-Trigger on: push to main branch & pull requests
+### Reporting
+- Mochawesome HTML report with embedded screenshots
+- Artifacts retained for quick review
 
-Pipeline includes:
-
-Dependency installation & caching
-
-Cypress verification & multi-browser testing
-
-Parallel execution & artifact collection
-
-Failure handling & reporting
-
-📊 Reporting & Artifacts
-
-Mochawesome HTML reports
-
-Screenshots on test failures
-
-Execution charts & analytics
-
-7-day artifact retention
-
-🔧 Development Workflow
-# Stage, commit, and push
+### Git workflow (solo)
+```bash
 git add .
 git commit -m "feat: add new test"
 git push origin main
+```
 
+Guidelines: descriptive commits, small increments, lint before push.
 
-Best Practices:
+### Quality
+- ESLint + sensible rules (Airbnb-inspired), Prettier formatting
+- Cypress plugin lint rules to promote good testing practices
 
-Descriptive commit messages
+—
 
-Test-first development
-
-Frequent commits with small changes
-
-Branch protection for main branch
-
-📚 Learning Objectives
-
-Master Cypress E2E testing framework
-
-Build reusable custom commands & Page Object Model
-
-Implement CI/CD pipelines with GitHub Actions
-
-Learn DevOps automation workflows
-
-Understand enterprise QA best practices
-
-Gain experience with API testing, performance, security, and mobile testing
-
-🤝 Contributing
-
-Fork the repository
-
-Create a feature branch
-
-Write comprehensive tests
-
-Ensure CI/CD passes
-
-Submit a pull request
-
-Code Standards: ESLint, Prettier, Conventional Commits, test coverage
-
-✅ Summary: This project is a student learning platform to practice QA/SDET workflows using AutomationExercise.com. It is not affiliated with AutomationExercise.com.
+This repository is designed as a focused learning environment for QA/SDET skills.
