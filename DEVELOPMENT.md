@@ -47,7 +47,7 @@ npm run cypress:open
 ### **Test Structure Best Practices**
 
 #### **1. File Naming Convention**
-```
+```text
 cypress/e2e/
 ├── User/
 │   ├── login.cy.js          # Specific functionality
