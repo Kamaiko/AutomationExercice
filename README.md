@@ -34,6 +34,9 @@ cypress/
 └── reports/      # HTML reports
 ```
 
+### Further details
+- See `DEVELOPMENT.md` for: test conventions, configuration, environments, CI, and quality gates.
+
 ### Test Conventions
  - Prefer data attributes for selectors: `[data-qa="..."]`
  - Avoid arbitrary waits; prefer `cy.intercept()` + assertions

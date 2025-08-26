@@ -8,32 +8,10 @@ Internal guide for maintaining a small, professional Cypress E2E suite. Target s
 - Minimal flakiness through network control and good selectors
 
 ### Quickstart
-- Prerequisites: Node.js 20+, npm 9+, Git
-- Install
-```bash
-git clone https://github.com/Kamaiko/AutomationExercice.git
-cd AutomationExercice
-npm install
-npx cypress verify
-```
-- Run tests
-```bash
-npm run cypress:open   # interactive
-npm run cypress:run    # headless
-npx cypress run --spec "cypress/e2e/User/login.cy.js"  # focused
-```
+- Refer to `README.md` for installation and basic usage commands.
 
 ### Structure
-```text
-cypress/
-├── e2e/          # test specs by domain
-├── fixtures/     # test data
-├── support/      # commands & setup
-│   ├── commands.js
-│   └── e2e.js
-├── screenshots/  # failure screenshots
-└── reports/      # HTML reports
-```
+- A concise overview is available in `README.md` (Repository Structure). This file focuses on standards and maintenance practices.
 
 ### Test Standards
 - Selectors: prefer `[data-qa="..."]`; avoid brittle class/text selectors
