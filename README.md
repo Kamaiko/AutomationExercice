@@ -5,7 +5,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-✓-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
 
-> **Professional E2E Testing Framework** for [AutomationExercise.com](https://automationexercise.com/) - A comprehensive testing solution demonstrating modern DevOps practices, CI/CD pipelines, and enterprise-grade automation testing.
+> **Learning Project: E2E Testing Framework** using [AutomationExercise.com](https://automationexercise.com/) as a practice platform - A comprehensive learning solution demonstrating modern DevOps practices, CI/CD pipelines, and enterprise-grade automation testing for QA/SDET career development.
 
 ## 📋 Table of Contents
 
@@ -24,7 +24,7 @@
 
 ## 🎯 Project Overview
 
-This project serves as a **comprehensive learning platform** for modern software development practices, focusing on:
+This project serves as a **comprehensive learning platform** for a **QA/SDET student** to practice modern software development practices, using AutomationExercise.com as a testing playground. The focus is on:
 
 - **🔍 E2E Testing Automation** with Cypress
 - **🔄 CI/CD Pipeline Implementation** using GitHub Actions
@@ -32,12 +32,14 @@ This project serves as a **comprehensive learning platform** for modern software
 - **🏗️ Enterprise Development Practices** and best practices
 - **🚀 DevOps Workflow** automation and optimization
 
-### 🎓 **Learning Goals**
-- Master **Cypress E2E Testing** framework
-- Implement **CI/CD pipelines** with GitHub Actions
-- Practice **DevOps methodologies** and automation
-- Develop **enterprise-grade testing strategies**
-- Gain hands-on experience with **modern development workflows**
+### 🎓 **Learning Goals for QA/SDET Career**
+- Master **Cypress E2E Testing** framework for web applications
+- Implement **CI/CD pipelines** with GitHub Actions for automation
+- Practice **DevOps methodologies** and automation workflows
+- Develop **enterprise-grade testing strategies** used in industry
+- Gain hands-on experience with **modern QA/SDET workflows**
+- Learn **Postman API testing** and automation
+- Understand **industry best practices** for quality assurance
 
 ## 🛠️ Tech Stack
 
@@ -55,6 +57,11 @@ This project serves as a **comprehensive learning platform** for modern software
 - **[GitHub Actions](https://github.com/features/actions)** - CI/CD automation
 - **[Ubuntu Latest](https://ubuntu.com/)** - CI/CD runner environment
 - **Artifact Management** - Test reports and screenshots storage
+
+### **API Testing & Tools**
+- **[Postman](https://www.postman.com/)** - API testing and automation
+- **REST API Testing** - Backend validation and integration
+- **API Automation** - Continuous API testing workflows
 
 ## 🏗️ Architecture & Best Practices
 
@@ -83,6 +90,9 @@ cypress/
 - **Modular Architecture** - Scalable test organization
 
 ## 🚀 Getting Started
+
+### **⚠️ Important Note**
+This project uses [AutomationExercise.com](https://automationexercise.com/) as a **practice platform for learning purposes only**. This is **NOT** an official project of AutomationExercise.com. It's a student learning project that demonstrates automation testing skills using their publicly available demo site.
 
 ### **Prerequisites**
 - Node.js 20.x or higher
@@ -276,11 +286,14 @@ git push origin main
    - Testing best practices
    - Scalable architecture design
 
-### **🚀 Advanced Topics**
-- **API Testing Integration** - REST/GraphQL testing
-- **Performance Testing** - Load and stress testing
-- **Security Testing** - Vulnerability assessment
-- **Mobile Testing** - Responsive design validation
+### **🚀 Advanced Topics for QA/SDET**
+- **API Testing Integration** - REST/GraphQL testing with Postman
+- **Performance Testing** - Load and stress testing with tools like JMeter
+- **Security Testing** - Vulnerability assessment and penetration testing
+- **Mobile Testing** - Responsive design validation and mobile automation
+- **Database Testing** - SQL queries and data validation
+- **Test Automation Frameworks** - Building scalable test architectures
+- **Continuous Testing** - Integration with CI/CD pipelines
 
 ## 🤝 Contributing
 
@@ -303,16 +316,17 @@ This project is licensed under the **ISC License** - see the [LICENSE](LICENSE) 
 
 ---
 
-## 🌟 **Why This Project?**
+## 🌟 **Why This Project for QA/SDET Students?**
 
-This repository serves as a **comprehensive learning platform** for modern software development practices. By working through this project, you'll gain:
+This repository serves as a **comprehensive learning platform** for QA/SDET students to practice industry-standard practices. By working through this project, you'll gain:
 
-- **Real-world experience** with enterprise testing frameworks
-- **Hands-on DevOps skills** through CI/CD implementation
-- **Professional development practices** used in top tech companies
-- **Portfolio-worthy projects** to showcase your skills
+- **Real-world experience** with enterprise testing frameworks used in companies
+- **Hands-on DevOps skills** through CI/CD implementation for automation
+- **Professional QA practices** used in top tech companies and startups
+- **Portfolio-worthy projects** to showcase your automation skills to employers
+- **Industry-relevant experience** that directly applies to QA/SDET roles
 
-**Ready to level up your development skills?** 🚀
+**Ready to level up your QA/SDET career?** 🚀
 
 ---
 
