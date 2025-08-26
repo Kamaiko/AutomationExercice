@@ -104,6 +104,7 @@ Cypress.Commands.add('signupUser', (user) => {
 
 
 // -------------------- LOGIN --------------------
+// Test comment for Git workflow verification
 Cypress.Commands.add('loginUser', (user) => {
   // Vérifier home page
   cy.get('body').should('be.visible')
