@@ -31,13 +31,25 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run
 
+      - name: List generated reports
+        if: always()
+        run: |
+          echo "Listing cypress reports directory"
+          ls -la
+          echo "-- cypress/reports --"
+          ls -R cypress/reports || true
+          echo "-- cypress/screenshots --"
+          ls -R cypress/screenshots || true
+          echo "-- cypress/videos --"
+          ls -R cypress/videos || true
+
       # 5️⃣ Upload Mochawesome HTML report as artifact (run even if tests fail)
       - name: Upload Mochawesome report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-report
-          path: cypress/reports/html
+          path: cypress/reports/**
           if-no-files-found: warn
 
       # Optional: Upload screenshots on failure
