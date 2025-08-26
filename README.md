@@ -1,4 +1,4 @@
-# 🚀 AutomationExercise.com - E2E Testing Framework
+# 🚀 AutomationExercice – Personal E2E Testing Project
 
 [![E2E Cypress](https://github.com/Kamaiko/AutomationExercice/actions/workflows/cypress.yml/badge.svg)](https://github.com/Kamaiko/AutomationExercice/actions/workflows/cypress.yml)
 [![Cypress](https://img.shields.io/badge/Cypress-14.5.4-00C58E?logo=cypress&logoColor=white)](https://cypress.io/)
