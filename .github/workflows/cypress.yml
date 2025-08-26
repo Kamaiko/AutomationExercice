@@ -1,58 +1,94 @@
-name: Cypress CI
+name: E2E Cypress
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+
+concurrency:
+  group: cypress-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  CI: true
 
 jobs:
-  cypress-run:
+  dependencies:
+    name: Prepare dependencies
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js + npm cache
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
-      # 3️⃣ Install dependencies
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-
+
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Run Cypress tests (cypress-mochawesome-reporter will generate the HTML report)
-      - name: Run Cypress tests
-        run: npx cypress run
+      - name: Verify Cypress binaries
+        run: npx cypress verify
 
-      - name: List generated reports
-        if: always()
-        run: |
-          echo "Listing cypress reports directory"
-          ls -la
-          echo "-- cypress/reports --"
-          ls -R cypress/reports || true
-          echo "-- cypress/screenshots --"
-          ls -R cypress/screenshots || true
-          echo "-- cypress/videos --"
-          ls -R cypress/videos || true
+  e2e:
+    name: Run E2E tests
+    needs: dependencies
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # 5️⃣ Upload Mochawesome HTML report as artifact (run even if tests fail)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Restore Cypress binary cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests (${{ matrix.browser }})
+        run: npx cypress run --browser ${{ matrix.browser }}
+
       - name: Upload Mochawesome report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-report
-          path: cypress/reports/**
+          path: cypress/reports/html
           if-no-files-found: warn
+          retention-days: 7
 
-      # Optional: Upload screenshots on failure
       - name: Upload Cypress screenshots
         if: failure()
         uses: actions/upload-artifact@v4
@@ -60,8 +96,8 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore
+          retention-days: 7
 
-      # Optional: Upload videos
       - name: Upload Cypress videos
         if: always()
         uses: actions/upload-artifact@v4
@@ -69,3 +105,4 @@ jobs:
           name: cypress-videos
           path: cypress/videos
           if-no-files-found: ignore
+          retention-days: 7
