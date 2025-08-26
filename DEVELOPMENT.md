@@ -1,12 +1,11 @@
 ### Development Guide
 
-Humble, focused guide for practicing modern E2E testing. This project targets AutomationExercise.com for learning purposes only (not affiliated).
+Internal guide for maintaining a small, professional Cypress E2E suite. Target site is AutomationExercise.com (learning use only).
 
-### Goals
-- End-to-end testing with Cypress
-- CI/CD with GitHub Actions
-- Clear reporting (Mochawesome)
-- Clean structure and pragmatic best practices
+### Objectives
+- Reliable, readable tests that reflect real user flows
+- Predictable CI runs with actionable reports
+- Minimal flakiness through network control and good selectors
 
 ### Quickstart
 - Prerequisites: Node.js 20+, npm 9+, Git
@@ -36,11 +35,11 @@ cypress/
 └── reports/      # HTML reports
 ```
 
-### Conventions
-- Selectors: prefer data attributes (`[data-qa="..."]`)
-- Reuse: move repeated flows into custom commands
-- Stability: avoid arbitrary waits; use intercepts and assertions
-- Readability: small, focused tests with clear assertions
+### Test Standards
+- Selectors: prefer `[data-qa="..."]`; avoid brittle class/text selectors
+- Timing: avoid fixed waits; use `cy.intercept()` and state-based assertions
+- Reuse: factor repeated flows into `cypress/support/commands.js`
+- Readability: single responsibility per test; explicit Arrange/Act/Assert
 
 ### Example commands
 ```javascript
@@ -69,20 +68,23 @@ module.exports = defineConfig({
 });
 ```
 
-### Env vars
+### Environments and Data
 ```bash
 # .env.local
 CYPRESS_BASE_URL=https://automationexercise.com
 CYPRESS_API_BASE_URL=https://api.automationexercise.com
 ```
+- Fixtures: store stable test data in `cypress/fixtures/`. Prefer data factories for generated cases.
 
-### CI/CD (GitHub Actions)
-- Triggers: push to main, PRs
-- Steps: install + cache, verify Cypress, run tests, upload artifacts (reports/screenshots)
+### CI/CD
+- Triggers: push to main, pull requests
+- Steps: install + cache; verify Cypress; run suites; upload reports/screenshots
+- Artifacts: `cypress/reports/html/index.html`, `cypress/screenshots/`
 
-### Reporting
-- Mochawesome HTML report with embedded screenshots
-- Artifacts retained for quick review
+### Quality Gates
+- Lint: `npm run lint` required to pass locally and in CI
+- Flake watch: address intermittent tests before merging
+- Reviews: keep diffs small; include rationale in PR description
 
 ### Git workflow (solo)
 ```bash
@@ -93,10 +95,10 @@ git push origin main
 
 Guidelines: descriptive commits, small increments, lint before push.
 
-### Quality
-- ESLint + sensible rules (Airbnb-inspired), Prettier formatting
-- Cypress plugin lint rules to promote good testing practices
+### Tooling
+- ESLint (JS/MD) + Prettier
+- Optional: `eslint-plugin-cypress` for Cypress-specific best practices
 
 —
 
-This repository is designed as a focused learning environment for QA/SDET skills.
+This repository is a focused learning environment that mirrors professional testing practices without unnecessary complexity.

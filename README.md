@@ -1,31 +1,30 @@
-### AutomationExercice – E2E Testing (Student Project)
+### AutomationExercice – E2E Test Suite
 
-Minimal, professional setup to practice modern E2E testing with Cypress. Uses AutomationExercise.com for learning only (not affiliated).
+Focused, production-like E2E test suite built with Cypress for the public demo site AutomationExercise.com (learning purposes only, not affiliated). The repository aims to reflect professional habits: explicit scope, predictable workflows, and clear quality gates.
 
-### Highlights
-- Cypress E2E + Mocha
-- GitHub Actions CI with artifacts
-- Mochawesome HTML reporting
-- Clear test structure and simple scripts
+### Scope
+- Functional UI flows: signup, login, shop, checkout, contact, core UI
+- Cross-browser via CI (Chrome baseline; others on demand)
+- Deterministic tests (network stubbing where valuable, minimal flakiness)
 
-### Quickstart
+### Installation and Usage
 ```bash
 git clone https://github.com/Kamaiko/AutomationExercice.git
 cd AutomationExercice
 npm install
 npx cypress verify
 
-# Interactive
+# Open interactive runner
 npm run cypress:open
 
-# Headless
+# Run headless
 npm run cypress:run
 
-# Focused
+# Run a focused spec
 npx cypress run --spec "cypress/e2e/User/login.cy.js"
 ```
 
-### Structure
+### Repository Structure
 ```text
 cypress/
 ├── e2e/          # specs by domain
@@ -35,7 +34,12 @@ cypress/
 └── reports/      # HTML reports
 ```
 
-### Useful commands
+### Test Conventions
+ - Prefer data attributes for selectors: `[data-qa="..."]`
+ - Avoid arbitrary waits; prefer `cy.intercept()` + assertions
+ - Extract repeated flows into custom commands
+
+### Custom Commands (examples)
 ```javascript
 // cypress/support/commands.js
 cy.signupUser(userData)
@@ -43,7 +47,7 @@ cy.loginUser(userData)
 cy.getByDataQa(attr)
 ```
 
-### Config (excerpt)
+### Cypress Configuration (excerpt)
 ```javascript
 // cypress.config.js
 module.exports = defineConfig({
@@ -58,15 +62,21 @@ module.exports = defineConfig({
 });
 ```
 
-### Env vars
+### Environments
 ```bash
 # .env.local
 CYPRESS_BASE_URL=https://automationexercise.com
 CYPRESS_API_BASE_URL=https://api.automationexercise.com
 ```
 
+### CI and Quality Gates
+- GitHub Actions: install, cache, verify, run tests, publish artifacts
+- Artifacts: Mochawesome HTML report, screenshots on failure
+- Lint: ESLint for JS/MD; warnings fail locally before push
+
 ### Contributing
-Small, focused PRs welcome. Please lint and ensure tests pass.
+- Keep PRs small and scoped to one concern
+- Ensure `npm run lint` and test run pass locally
 
 ### License
 ISC. See LICENSE.
